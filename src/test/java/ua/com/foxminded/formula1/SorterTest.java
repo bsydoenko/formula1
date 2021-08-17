@@ -11,20 +11,21 @@ import org.junit.jupiter.api.Test;
 class SorterTest {
 
 	Sorter sorter = new Sorter();
+	RacerRepository racerRepository = new RacerRepository();
 
 	@Test
 	void givenUnsortedList_whenSortRacers_thenSortedList() {
 		List<Racer> test = new ArrayList<Racer>();
-		test.add(new Racer("FAM"));
-		test.add(new Racer("DRR"));
-		test.add(new Racer("RGH"));
-		test.add(new Racer("CLS"));
+		test.add(racerRepository.getRacer("FAM"));
+		test.add(racerRepository.getRacer("DRR"));
+		test.add(racerRepository.getRacer("RGH"));
+		test.add(racerRepository.getRacer("CLS"));
 
 		List<Racer> expected = new ArrayList<Racer>();
-		expected.add(new Racer("DRR"));
-		expected.add(new Racer("FAM"));
-		expected.add(new Racer("CLS"));
-		expected.add(new Racer("RGH"));
+		expected.add(racerRepository.getRacer("DRR"));
+		expected.add(racerRepository.getRacer("FAM"));
+		expected.add(racerRepository.getRacer("CLS"));
+		expected.add(racerRepository.getRacer("RGH"));
 
 		assertEquals(sorter.sortRacers(test), expected);
 	}
@@ -40,7 +41,7 @@ class SorterTest {
 	@Test
 	void givenListWhithOneObject_whenSortRacers_thenTheSameList() {
 		List<Racer> test = new ArrayList<Racer>();
-		test.add(new Racer("FAM"));
+		test.add(racerRepository.getRacer("FAM"));
 
 		assertEquals(sorter.sortRacers(test), test);
 	}

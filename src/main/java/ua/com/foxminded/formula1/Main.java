@@ -1,11 +1,7 @@
 package ua.com.foxminded.formula1;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
 
@@ -14,18 +10,10 @@ public class Main {
 	public static final String SPACE = " ";
 
 	public static void main(String[] args) {
-		List<Racer> racers = new ArrayList<Racer>();
-		try {
-			Scanner scannerAbbreviations = new Scanner(new File("src/main/resources/raceData/abbreviations.txt"));
-			while (scannerAbbreviations.hasNext()) {
-				racers.add(new Racer(scannerAbbreviations.nextLine().substring(0, 3)));
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
+		RacerRepository racerRepository = new RacerRepository();
 		Sorter sorter = new Sorter();
-		printResult(sorter.sortRacers(racers));
+		
+		printResult(sorter.sortRacers(racerRepository.getRacers()));
 	}
 
 	private static void printResult(List<Racer> sortedRacers) {
