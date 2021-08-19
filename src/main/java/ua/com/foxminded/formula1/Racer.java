@@ -1,15 +1,12 @@
 package ua.com.foxminded.formula1;
 
 import java.time.LocalTime;
-import java.util.Date;
 
 public class Racer {
 
 	private String name;
 	private String car;
-	private Date startTime;
-	private Date endTime;
-	private LocalTime timeOfLap;
+	private LocalTime bestLapTime;
 
 	public String getName() {
 		return name;
@@ -27,28 +24,12 @@ public class Racer {
 		this.car = car;
 	}
 
-	public LocalTime getTimeOfLap() {
-		return timeOfLap;
+	public LocalTime getBestLapTime() {
+		return bestLapTime;
 	}
 
-	public void setTimeOfLap(LocalTime timeOfLap) {
-		this.timeOfLap = timeOfLap;
-	}
-
-	public Date getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-
-	public Date getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
+	public void setBestLapTime(LocalTime timeOfLap) {
+		this.bestLapTime = timeOfLap;
 	}
 
 	@Override
@@ -62,8 +43,7 @@ public class Racer {
 
 		Racer guest = (Racer) obj;
 		return (name == guest.name || (name != null && name.equals(guest.getName())))
-				&& (car == guest.car || (car != null && car.equals(guest.getCar()))
-						&& (startTime.getTime() == guest.startTime.getTime()) && (endTime.equals(guest.endTime)))
-				&& (timeOfLap.equals(guest.timeOfLap));
+				&& (car == guest.car || (car != null && car.equals(guest.getCar())))
+				&& (bestLapTime.equals(guest.bestLapTime));
 	}
 }
