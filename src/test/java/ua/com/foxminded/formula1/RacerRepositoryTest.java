@@ -1,61 +1,42 @@
 package ua.com.foxminded.formula1;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.text.ParseException;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
 
 class RacerRepositoryTest {
 
 	RacerRepository racerRepository = new RacerRepository();
 
 	@Test
-	void givenNull_whenGetRacer_thenIllegalArgumentException() {
-		Assertions.assertThrows(IllegalArgumentException.class, () -> racerRepository.getRacer(null));
-	}
-
-	@Test
-	void givenAbbreviationFromFile_whenGetRacer_thenClassObjectwithTrueFields() throws ParseException {
-		Racer test = racerRepository.getRacer("DRR");
-		Racer expected = new Racer();
-		expected.setName("Daniel Ricciardo");
-		expected.setCar("RED BULL RACING TAG HEUER");
-		expected.setBestLapTime(LocalTime.of(0, 1, 12, 13));
-		assertEquals(test, expected);
-	}
-
-	@Test
-	void givenMissingAbbreviationInFile_wheGetRacer_thenIllegalArgumentException() {
-		Assertions.assertThrows(IllegalArgumentException.class, () -> racerRepository.getRacer("ABC"));
-	}
-
-	@Test
 	void givenNothing_whenGetRacers_thenListOfRacers() {
 		List<Racer> test = racerRepository.getRacers();
 		List<Racer> expected = new ArrayList<Racer>();
-		expected.add(racerRepository.getRacer("DRR"));
-		expected.add(racerRepository.getRacer("SVF"));
-		expected.add(racerRepository.getRacer("LHM"));
-		expected.add(racerRepository.getRacer("KRF"));
-		expected.add(racerRepository.getRacer("VBM"));
-		expected.add(racerRepository.getRacer("EOF"));
-		expected.add(racerRepository.getRacer("FAM"));
-		expected.add(racerRepository.getRacer("CSR"));
-		expected.add(racerRepository.getRacer("SPF"));
-		expected.add(racerRepository.getRacer("PGS"));
-		expected.add(racerRepository.getRacer("NHR"));
-		expected.add(racerRepository.getRacer("SVM"));
-		expected.add(racerRepository.getRacer("SSW"));
-		expected.add(racerRepository.getRacer("CLS"));
-		expected.add(racerRepository.getRacer("RGH"));
-		expected.add(racerRepository.getRacer("BHS"));
-		expected.add(racerRepository.getRacer("MES"));
-		expected.add(racerRepository.getRacer("LSW"));
-		expected.add(racerRepository.getRacer("KMH"));
-		assertEquals(test, expected);
+		expected.add(new Racer("Sebastian Vettel", "FERRARI", Duration.parse("PT1M4.415S")));
+		expected.add(new Racer("Daniel Ricciardo", "RED BULL RACING TAG HEUER", Duration.parse("PT1M12.013S")));
+		expected.add(new Racer("Valtteri Bottas", "MERCEDES", Duration.parse("PT1M12.434S")));
+		expected.add(new Racer("Lewis Hamilton", "MERCEDES", Duration.parse("PT1M12.46S")));
+		expected.add(new Racer("Stoffel Vandoorne", "MCLAREN RENAULT", Duration.parse("PT1M12.463S")));
+		expected.add(new Racer("Kimi Raikkonen", "FERRARI", Duration.parse("PT1M12.639S")));
+		expected.add(new Racer("Fernando Alonso", "MCLAREN RENAULT", Duration.parse("PT1M12.657S")));
+		expected.add(new Racer("Sergey Sirotkin", "WILLIAMS MERCEDES", Duration.parse("PT1M12.706S")));
+		expected.add(new Racer("Charles Leclerc", "SAUBER FERRARI", Duration.parse("PT1M12.829S")));
+		expected.add(new Racer("Sergio Perez", "FORCE INDIA MERCEDES", Duration.parse("PT1M12.848S")));
+		expected.add(new Racer("Romain Grosjean", "HAAS FERRARI", Duration.parse("PT1M12.93S")));
+		expected.add(new Racer("Pierre Gasly", "SCUDERIA TORO ROSSO HONDA", Duration.parse("PT1M12.941S")));
+		expected.add(new Racer("Carlos Sainz", "RENAULT", Duration.parse("PT1M12.95S")));
+		expected.add(new Racer("Esteban Ocon", "FORCE INDIA MERCEDES", Duration.parse("PT1M13.028S")));
+		expected.add(new Racer("Nico Hulkenberg", "RENAULT", Duration.parse("PT1M13.065S")));
+		expected.add(new Racer("Brendon Hartley", "SCUDERIA TORO ROSSO HONDA", Duration.parse("PT1M13.179S")));
+		expected.add(new Racer("Marcus Ericsson", "SAUBER FERRARI", Duration.parse("PT1M13.265S")));
+		expected.add(new Racer("Lance Stroll", "WILLIAMS MERCEDES", Duration.parse("PT1M13.323S")));
+		expected.add(new Racer("Kevin Magnussen", "HAAS FERRARI", Duration.parse("PT1M13.393S")));
+
+		assertTrue(test.size() == expected.size() && 
+			    test.containsAll(expected) && expected.containsAll(test));
 	}
 }

@@ -5,7 +5,7 @@ public class Main {
 	public static void main(String[] args) {
 		RacerRepository racerRepository = new RacerRepository();
 		BestRacersFormatter bestRacersFormatter = new BestRacersFormatter();
-
-		bestRacersFormatter.printResult(racerRepository.getRacers());
+		
+		System.out.print(bestRacersFormatter.format(racerRepository.getRacers()));
 	}
 }

@@ -1,12 +1,19 @@
 package ua.com.foxminded.formula1;
 
-import java.time.LocalTime;
+import java.time.Duration;
+import java.util.Objects;
 
 public class Racer {
 
 	private String name;
 	private String car;
-	private LocalTime bestLapTime;
+	private Duration bestLapTime;
+
+	public Racer(String name, String car, Duration bestLapTime) {
+		this.name = name;
+		this.car = car;
+		this.bestLapTime = bestLapTime;
+	}
 
 	public String getName() {
 		return name;
@@ -24,12 +31,12 @@ public class Racer {
 		this.car = car;
 	}
 
-	public LocalTime getBestLapTime() {
+	public Duration getBestLapTime() {
 		return bestLapTime;
 	}
 
-	public void setBestLapTime(LocalTime timeOfLap) {
-		this.bestLapTime = timeOfLap;
+	public void setBestLapTime(Duration BestLapTime) {
+		this.bestLapTime = BestLapTime;
 	}
 
 	@Override
@@ -46,4 +53,9 @@ public class Racer {
 				&& (car == guest.car || (car != null && car.equals(guest.getCar())))
 				&& (bestLapTime.equals(guest.bestLapTime));
 	}
+
+	@Override
+    public int hashCode() {
+        return Objects.hash(name, car, bestLapTime);
+    }
 }
