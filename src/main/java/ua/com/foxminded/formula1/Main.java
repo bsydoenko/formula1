@@ -6,6 +6,6 @@ public class Main {
 		RacerRepository racerRepository = new RacerRepository();
 		BestRacersFormatter bestRacersFormatter = new BestRacersFormatter();
 		
-		System.out.print(bestRacersFormatter.format(racerRepository.getRacers()));
+		System.out.print(bestRacersFormatter.format(racerRepository.getRacers("abbreviations.txt", "start.log", "end.log"), 15));
 	}
 }

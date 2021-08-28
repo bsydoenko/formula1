@@ -35,27 +35,27 @@ public class Racer {
 		return bestLapTime;
 	}
 
-	public void setBestLapTime(Duration BestLapTime) {
-		this.bestLapTime = BestLapTime;
+	public void setBestLapTime(Duration bestLapTime) {
+		this.bestLapTime = bestLapTime;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (obj == this) {
+	public boolean equals(Object o) {
+		if (o == this) {
 			return true;
 		}
-		if (obj == null || obj.getClass() != this.getClass()) {
+		if (!(o instanceof Racer))
 			return false;
-		}
-
-		Racer guest = (Racer) obj;
-		return (name == guest.name || (name != null && name.equals(guest.getName())))
-				&& (car == guest.car || (car != null && car.equals(guest.getCar())))
-				&& (bestLapTime.equals(guest.bestLapTime));
+		Racer other = (Racer) o;
+		boolean currencyName = (this.name == null && other.name == null)
+				|| (this.name != null && this.name.equals(other.name));
+		boolean currencyCar = (this.car == null && other.car == null)
+				|| (this.car != null && this.car.equals(other.car));
+		return  currencyName && currencyCar && (this.bestLapTime.equals(other.bestLapTime));
 	}
 
 	@Override
-    public int hashCode() {
-        return Objects.hash(name, car, bestLapTime);
-    }
+	public int hashCode() {
+		return Objects.hash(name, car, bestLapTime);
+	}
 }

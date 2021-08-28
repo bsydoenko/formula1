@@ -17,6 +17,28 @@ public class RacerRepository {
 
 	public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss.SSS");
 
+	public List<Racer> getRacers(String abbreviationsFile, String startLogFile, String endLogFile) {
+		if (abbreviationsFile == null || startLogFile == null || endLogFile == null) {
+			throw new IllegalArgumentException("file cannot be null.");
+		}
+		
+		List<Racer> racers = new ArrayList<Racer>();
+		try {
+			Map<String, LocalDateTime> startLogInf = getLogInformation(startLogFile);
+			Map<String, LocalDateTime> endLogInf = getLogInformation(endLogFile);
+			racers = readFile(abbreviationsFile).map(s -> s.split("_"))
+					.map(s -> getRacer(s[1], s[2], startLogInf.get(s[0]), endLogInf.get(s[0])))
+					.collect(Collectors.toList());
+		} catch(Exception e) {
+			throw new IllegalArgumentException("file does not exist or is incorrect");
+		}		
+		return racers;
+	}
+
+	private Racer getRacer(String name, String car, LocalDateTime startTime, LocalDateTime endTime) {
+		return new Racer(name, car, Duration.between(startTime, endTime));
+	}
+
 	private Map<String, LocalDateTime> getLogInformation(String fileName) {
 		return readFile(fileName)
 				.collect(Collectors.toMap(s -> s.substring(0, 3), s -> LocalDateTime.parse(s.substring(3), FORMATTER)));
@@ -30,19 +52,5 @@ public class RacerRepository {
 			e.printStackTrace();
 		}
 		return lines;
-	}
-
-	public List<Racer> getRacers() {
-		Map<String, LocalDateTime> startLogInf = getLogInformation("start.log");
-		Map<String, LocalDateTime> endLogInf = getLogInformation("end.log");
-
-		List<Racer> racers = new ArrayList<Racer>();
-		readFile("abbreviations.txt").map(s->s.split("_")).forEach(s->racers.add(getRacer(s[1], s[2], startLogInf.get(s[0]), endLogInf.get(s[0]))));
-		return racers;
-	}
-
-	public Racer getRacer(String name, String car, LocalDateTime startTime, LocalDateTime endTime) {
-		Racer racer = new Racer(name, car, Duration.between(startTime, endTime));
-		return racer;
 	}
 }
