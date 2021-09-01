@@ -41,7 +41,7 @@ class RacerRepositoryTest {
 		Assertions.assertThrows(IllegalArgumentException.class,
 				() -> racerRepository.getRacers("blabla.txt", "bla.log", "bla.log"));
 	}
-	
+
 	@Test
 	void givenUncorrectFiles_whenGetRacers_thenIllegalArgumentException() {
 		Assertions.assertThrows(IllegalArgumentException.class,

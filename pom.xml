@@ -18,6 +18,7 @@
 		<junit-jupiter.version>5.4.2</junit-jupiter.version>
 		<junit-platform-launcher.version>1.4.2</junit-platform-launcher.version>
 		<commons-io.version>2.5</commons-io.version>
+		<guava.varsion>21.0</guava.varsion>
 	</properties>
 
 	<dependencies>
@@ -25,6 +26,11 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.varsion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
